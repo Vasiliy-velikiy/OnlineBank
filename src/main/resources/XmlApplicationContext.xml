@@ -5,7 +5,7 @@
 >
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
-    <bean id="userRepository" class="com.example.spring4.repository.UserRepository">
+    <bean id="userRepository" class="com.example.spring4.repository.impl.UserRepositoryImpl">
         <constructor-arg ref="objectMapper"/>
     </bean>
 
@@ -16,5 +16,6 @@
     <bean id="userController" class="com.example.spring4.controller.UserController">
         <constructor-arg name="objectMapper" ref="objectMapper"/>
         <constructor-arg name="userService" ref="userService"/>
+        <property name="setterUserService" ref="userService"/>
     </bean>
 </beans>

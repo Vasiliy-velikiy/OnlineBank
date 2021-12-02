@@ -4,6 +4,7 @@ import com.example.spring4.domain.entity.User;
 import com.example.spring4.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.SneakyThrows;
 
 import static java.util.UUID.fromString;
@@ -16,6 +17,9 @@ import static java.util.UUID.fromString;
 public class UserController {
     private final ObjectMapper objectMapper;
     private final UserService userService;
+
+    @Setter
+    private UserService setterUserService;
 
     @SneakyThrows
     public String get(String id) {
