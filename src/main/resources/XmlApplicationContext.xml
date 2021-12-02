@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
+    <bean id="userRepository" class="com.example.spring4.repository.UserRepository">
+        <constructor-arg ref="objectMapper"/>
+    </bean>
+
+    <bean id="userService" class="com.example.spring4.service.impl.UserServiceImp">
+        <constructor-arg ref="userRepository"/>
+    </bean>
+
+    <bean id="userController" class="com.example.spring4.controller.UserController">
+        <constructor-arg name="objectMapper" ref="objectMapper"/>
+        <constructor-arg name="userService" ref="userService"/>
+    </bean>
+</beans>
