@@ -5,6 +5,7 @@ import com.example.spring4.repository.UserRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -18,6 +19,7 @@ import static java.util.UUID.randomUUID;
  * @author dkotov
  * @since 30.11.2021
  */
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private final ObjectMapper objectMapper;

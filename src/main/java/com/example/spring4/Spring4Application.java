@@ -11,7 +11,7 @@ public class Spring4Application {
 //        UserController userController = new UserController();
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Spring4ApplicationConfiguration.class);
         UserController userController = applicationContext.getBean("userController", UserController.class);
-        String input = "{\"firstName\":\"firstName\"}";
+        String input = "{\"firstName\":\"firstName\",\"email\":\"email\"}";
         userController.create(input);
         System.out.println(userController.get("4b39c6b1-716a-4201-b1d9-4e26773e7cc4"));
     }
