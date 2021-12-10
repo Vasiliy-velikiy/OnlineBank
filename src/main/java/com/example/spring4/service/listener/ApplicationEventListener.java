@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationEventListener {
 
-    @EventListener(UserCreateEvent.class)
+    @EventListener
     public void onEvent(final UserCreateEvent event) {
         System.out.println(event.getEmail());
     }
