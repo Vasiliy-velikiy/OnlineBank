@@ -7,14 +7,10 @@ import java.util.UUID;
 
 /**
  * @author dkotov
- * @since 30.11.2021
+ * @since 21.12.2021
  */
 @Getter
 @Setter
-public class User {
+public class Address {
     UUID id;
-    String firstName;
-    String lastName;
-    String email;
-    Address address;
 }

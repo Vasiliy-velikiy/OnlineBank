@@ -1,6 +1,5 @@
 package com.example.spring4.domain.dto;
 
-import com.example.spring4.domain.dto.address.AddressDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
@@ -18,10 +17,11 @@ import static lombok.AccessLevel.PRIVATE;
 @Builder
 @Jacksonized
 @AllArgsConstructor(access = PRIVATE)
-public class UserDto {
+public class UserInfoDto {
     UUID id;
     String firstName;
     String lastName;
     String email;
-    AddressDto address;
+
+    UUID addressId;
 }

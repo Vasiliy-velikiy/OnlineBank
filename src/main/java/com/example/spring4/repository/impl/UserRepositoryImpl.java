@@ -45,7 +45,8 @@ public class UserRepositoryImpl implements UserRepository {
     public User create(User user) {
         Map<UUID, User> content = findAll();
         UUID id = randomUUID();
-        content.put(id, user.withId(id));
+        user.setId(id);
+        content.put(id, user);
         Files.writeString(path, objectMapper.writeValueAsString(content));
         return findAll().get(id);
     }
@@ -54,7 +55,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User update(User user) {
         Map<UUID, User> content = findAll();
         UUID id = user.getId();
-        content.put(id, user.withId(id));
+        content.put(id, user);
         Files.writeString(path, objectMapper.writeValueAsString(content));
         return findAll().get(id);
     }
