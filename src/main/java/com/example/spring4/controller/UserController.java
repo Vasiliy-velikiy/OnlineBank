@@ -10,12 +10,12 @@ import com.example.spring4.domain.dto.address.AddressUpdateDto;
 import com.example.spring4.domain.exception.UserNotFoundException;
 import com.example.spring4.domain.mapper.UserMapper;
 import com.example.spring4.service.UserService;
-import com.example.spring4.validation.validator.UserCreateDtoValidator;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +37,10 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "users")
+@Tag(name = "User", description = "description")
+@ApiResponse(responseCode = "500", description = "Internal error")
+@ApiResponse(responseCode = "400", description = "Validation failed")
+@ApiResponse(responseCode = "404", description = "User not found")
 public class UserController {
     private final UserMapper userMapper;
     private final UserService userService;
@@ -47,6 +51,9 @@ public class UserController {
      * @param id user id
      * @return user on JSON format
      */
+    @Operation(description = "Find user by id")
+    @ApiResponse(responseCode = "200", description = "User found")
+    @ApiResponse(responseCode = "500", description = "User not found")
     @GetMapping("/{userId}")
     public UserDto get(@PathVariable(name = "userId") UUID id) {
         return Optional.of(id)
@@ -55,6 +62,8 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
+    @Operation(description = "Find user info by id")
+    @ApiResponse(responseCode = "200", description = "User info found")
     @GetMapping("/info/{userId}")
     public UserInfoDto getInfo(@PathVariable(name = "userId") UUID id) {
         return Optional.of(id)
@@ -63,6 +72,8 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
+    @Operation(description = "Create user")
+    @ApiResponse(responseCode = "200", description = "User created")
     @PostMapping
     public UserDto create(@Valid @RequestBody UserCreateDto createDto) {
         return Optional.ofNullable(createDto)
@@ -72,6 +83,8 @@ public class UserController {
                 .orElseThrow();
     }
 
+    @Operation(description = "Update user by id")
+    @ApiResponse(responseCode = "200", description = "User updated")
     @PatchMapping("/{userId}")
     public UserDto update(@PathVariable(name = "userId") UUID id, @RequestBody UserUpdateDto updateDto) {
         return Optional.ofNullable(updateDto)
@@ -81,6 +94,8 @@ public class UserController {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
+    @Operation(description = "Remove user by id")
+    @ApiResponse(responseCode = "204", description = "User removed")
     @DeleteMapping("/{userId}")
     @ResponseStatus(value = NO_CONTENT)
     public void delete(@PathVariable(name = "userId") UUID id) {
