@@ -26,6 +26,7 @@ public interface UserMapper {
     @Mapping(target = "address", ignore = true)
     User fromUpdateDto(UserUpdateDto source);
 
+    @Mapping(target = "age", ignore = true)
     UserDto toDto(User source);
 
     @Mapping(target = "addressId", source = "address.id")

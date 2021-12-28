@@ -22,6 +22,7 @@ public class UserDto {
     UUID id;
     String firstName;
     String lastName;
+    int age;
     String email;
     AddressDto address;
 }

@@ -16,4 +16,5 @@ import static lombok.AccessLevel.PRIVATE;
 @Jacksonized
 @AllArgsConstructor(access = PRIVATE)
 public class AddressCreateDto {
+    String city;
 }
