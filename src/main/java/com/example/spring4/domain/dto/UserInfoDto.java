@@ -22,7 +22,7 @@ import static lombok.AccessLevel.PRIVATE;
 public class UserInfoDto {
     @Schema(description = "User id",
             required = true,
-            pattern = "regex",
+            pattern = "*.",
             maxLength = 36,
             minLength = 36)
     UUID id;
@@ -32,7 +32,6 @@ public class UserInfoDto {
     String lastName;
     @Schema(description = "Email")
     String email;
-
     @Schema(description = "Address id")
     UUID addressId;
 }

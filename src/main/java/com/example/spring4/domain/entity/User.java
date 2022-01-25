@@ -3,7 +3,8 @@ package com.example.spring4.domain.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  * @author dkotov
@@ -11,10 +12,11 @@ import java.util.UUID;
  */
 @Getter
 @Setter
-public class User {
-    UUID id;
-    String firstName;
-    String lastName;
-    String email;
-    Address address;
+@Entity
+public class User extends BaseEntity {
+    private String firstName;
+    private String lastName;
+    private String email;
+    @OneToOne
+    private Address address;
 }
