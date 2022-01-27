@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 
 /**
@@ -17,6 +18,7 @@ public class User extends BaseEntity {
     private String firstName;
     private String lastName;
     private String email;
-    @OneToOne
+    private int age;
+    @OneToOne(fetch = FetchType.LAZY)
     private Address address;
 }

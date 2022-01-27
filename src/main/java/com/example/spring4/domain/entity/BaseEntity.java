@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -23,6 +24,7 @@ import static lombok.AccessLevel.PRIVATE;
 public abstract class BaseEntity {
     @Id
     @GeneratedValue
+    @Column(columnDefinition = "varchar(36)")
     private UUID id;
 
     @Version

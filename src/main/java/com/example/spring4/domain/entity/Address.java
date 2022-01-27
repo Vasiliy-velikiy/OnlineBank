@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import java.util.UUID;
 
 /**
  * @author dkotov
@@ -13,5 +12,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-public class Address extends BaseEntity{
+public class Address extends BaseEntity {
+    private String city;
 }
