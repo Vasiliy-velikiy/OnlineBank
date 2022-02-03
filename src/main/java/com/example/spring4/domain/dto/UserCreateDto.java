@@ -12,6 +12,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import java.util.Set;
+
 import static lombok.AccessLevel.PRIVATE;
 
 /**
@@ -26,6 +28,7 @@ public class UserCreateDto {
     @NotBlank(message = "{firstname.empty}")
     String firstName;
     String lastName;
+    String longAsString;
     @NotNull
     @Min(value = 0)
     @Max(value = 120)
@@ -33,4 +36,5 @@ public class UserCreateDto {
     @Email
     String email;
     AddressCreateDto address;
+    Set<String> someIds;
 }

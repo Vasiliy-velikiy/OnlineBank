@@ -79,7 +79,10 @@ public class UserController {
         return Optional.ofNullable(createDto)
                 .map(userMapper::fromCreateDto)
                 .map(userService::create)
-                .map(userMapper::toDto)
+                .map(it -> {
+                    userService.getAccount(it.getSecond().getId());
+                    return userMapper.toDto(it.getFirst());
+                })
                 .orElseThrow();
     }
 

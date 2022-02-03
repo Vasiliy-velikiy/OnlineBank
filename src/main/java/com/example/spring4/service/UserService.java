@@ -1,6 +1,8 @@
 package com.example.spring4.service;
 
 import com.example.spring4.domain.entity.User;
+import com.example.spring4.domain.entity.billing.BankAccount;
+import org.springframework.data.util.Pair;
 
 import java.util.UUID;
 
@@ -11,7 +13,9 @@ import java.util.UUID;
 public interface UserService {
     User get(UUID id);
 
-    User create(User userJson);
+    Pair<User, BankAccount> create(User userJson);
+
+   void getAccount(UUID id);
 
     User update(UUID id, User userJson);
 

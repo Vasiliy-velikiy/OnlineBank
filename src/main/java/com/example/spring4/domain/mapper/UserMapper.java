@@ -27,6 +27,7 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "address", ignore = true)
     @Mapping(target = "role", ignore = true)
+    @Mapping(target = "someIds", ignore = true)
     @Mapping(target = "addressEmbeddable", ignore = true)
     User fromUpdateDto(UserUpdateDto source);
 

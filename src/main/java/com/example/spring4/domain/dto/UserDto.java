@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
 
+import java.util.Set;
 import java.util.UUID;
 
 import static lombok.AccessLevel.PRIVATE;
@@ -22,7 +23,9 @@ public class UserDto {
     UUID id;
     String firstName;
     String lastName;
+    String longAsString;
     int age;
     String email;
     AddressDto address;
+    Set<String> someIds;
 }
