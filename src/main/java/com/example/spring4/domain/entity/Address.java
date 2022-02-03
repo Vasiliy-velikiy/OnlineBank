@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * @author dkotov
@@ -12,6 +13,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @Entity
+@Table(name = "addresses")
 public class Address extends BaseEntity {
     private String city;
 }

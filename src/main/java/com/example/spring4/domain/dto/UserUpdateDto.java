@@ -20,4 +20,5 @@ public class UserUpdateDto {
     String firstName;
     String lastName;
     String email;
+    int age;
 }

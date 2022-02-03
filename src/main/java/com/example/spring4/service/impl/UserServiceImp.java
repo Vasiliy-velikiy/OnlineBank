@@ -2,7 +2,6 @@ package com.example.spring4.service.impl;
 
 import com.example.spring4.domain.entity.User;
 import com.example.spring4.domain.mapper.UserMapper;
-import com.example.spring4.repository.CustomUserRepository;
 import com.example.spring4.repository.UserRepository;
 import com.example.spring4.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,17 +22,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
-    private final CustomUserRepository customUserRepository;
     private final UserMapper userMapper;
 
     @Override
     public User get(UUID id) {
-        return customUserRepository.get(id);
+        return userRepository.getById(id);
     }
 
     @Override
     public User create(User user) {
-        return customUserRepository.create(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -41,12 +39,12 @@ public class UserServiceImp implements UserService {
         return Optional.of(id)
                 .map(this::get)
                 .map(current -> userMapper.merge(current, user))
-                .map(customUserRepository::update)
+                .map(userRepository::save)
                 .orElseThrow();
     }
 
     @Override
     public void delete(UUID id) {
-        customUserRepository.delete(id);
+        userRepository.deleteById(id);
     }
 }

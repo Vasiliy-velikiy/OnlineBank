@@ -3,6 +3,8 @@ package com.example.spring4.domain.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.AccessType;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

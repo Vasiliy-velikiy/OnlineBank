@@ -20,10 +20,14 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "address", ignore = true)
+    @Mapping(target = "role", ignore = true)
+    @Mapping(target = "addressEmbeddable", ignore = true)
     User fromCreateDto(UserCreateDto source);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "address", ignore = true)
+    @Mapping(target = "role", ignore = true)
+    @Mapping(target = "addressEmbeddable", ignore = true)
     User fromUpdateDto(UserUpdateDto source);
 
     @Mapping(target = "age", ignore = true)

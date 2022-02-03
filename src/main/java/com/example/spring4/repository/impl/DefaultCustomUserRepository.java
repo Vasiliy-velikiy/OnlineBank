@@ -42,12 +42,6 @@ public class DefaultCustomUserRepository implements CustomUserRepository {
     @Transactional
     public void delete(UUID id) {
         User user = get(id);
-        this.doSmth();
         entityManager.remove(user);
-    }
-
-    @Transactional
-    public void doSmth() {
-        System.out.println();
     }
 }

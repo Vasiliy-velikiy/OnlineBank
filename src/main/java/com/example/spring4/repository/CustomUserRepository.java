@@ -16,6 +16,4 @@ public interface CustomUserRepository {
     User update(User user);
 
     void delete(UUID id);
-
-    void doSmth();
 }
