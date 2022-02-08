@@ -22,6 +22,7 @@ public interface UserMapper {
     @Mapping(target = "address", ignore = true)
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "addressEmbeddable", ignore = true)
+    @Mapping(target = "billingDetails", ignore = true)
     User fromCreateDto(UserCreateDto source);
 
     @Mapping(target = "id", ignore = true)
@@ -29,6 +30,7 @@ public interface UserMapper {
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "someIds", ignore = true)
     @Mapping(target = "addressEmbeddable", ignore = true)
+    @Mapping(target = "billingDetails", ignore = true)
     User fromUpdateDto(UserUpdateDto source);
 
     @Mapping(target = "age", ignore = true)
@@ -37,6 +39,7 @@ public interface UserMapper {
     @Mapping(target = "addressId", source = "address.id")
     UserInfoDto toInfoDto(User source);
 
+    @Mapping(target = "billingDetails", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
     User merge(@MappingTarget User target, User source);
 }

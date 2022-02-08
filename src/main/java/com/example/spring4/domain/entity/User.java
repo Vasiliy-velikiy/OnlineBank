@@ -1,5 +1,6 @@
 package com.example.spring4.domain.entity;
 
+import com.example.spring4.domain.entity.billing.singletable.BillingDetails;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,13 +16,21 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.example.spring4.domain.entity.Role.ADMIN;
+import static javax.persistence.CascadeType.DETACH;
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REFRESH;
 import static javax.persistence.EnumType.STRING;
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * @author dkotov
@@ -48,6 +57,12 @@ public class User extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private Address address;
 
+    @Setter(PRIVATE)
+    @OneToMany(mappedBy = "user",
+            orphanRemoval = true,
+            cascade = {PERSIST, MERGE, DETACH, REFRESH})
+    private List<BillingDetails> billingDetails = new ArrayList<>();
+
     @ElementCollection
     @CollectionTable(name = "someObjects",
             joinColumns = @JoinColumn(name = "user_id"))
@@ -65,5 +80,14 @@ public class User extends BaseEntity {
         public String convertToEntityAttribute(Long dbData) {
             return dbData == null ? null : dbData.toString();
         }
+    }
+
+    public void addBillingDetails(BillingDetails billingDetails) {
+        this.billingDetails.add(billingDetails);
+        billingDetails.setUser(this);
+    }
+
+    public void removeBillingDetails(BillingDetails billingDetails) {
+        this.billingDetails.remove(billingDetails);
     }
 }

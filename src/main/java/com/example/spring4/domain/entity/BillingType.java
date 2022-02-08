@@ -6,5 +6,8 @@ package com.example.spring4.domain.entity;
  */
 public enum BillingType {
     ACCOUNT,
-    CREDIT
+    CREDIT;
+
+    public static final String ACCOUNT_NAME = "ACCOUNT";
+    public static final String CREDIT_NAME = "CREDIT";
 }

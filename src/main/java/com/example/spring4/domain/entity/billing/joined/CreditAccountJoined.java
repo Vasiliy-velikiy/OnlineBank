@@ -1,4 +1,4 @@
-package com.example.spring4.domain.entity.billing;
+package com.example.spring4.domain.entity.billing.joined;
 
 import com.example.spring4.domain.entity.BillingType;
 import lombok.AllArgsConstructor;
@@ -20,8 +20,8 @@ import static com.example.spring4.domain.entity.BillingType.CREDIT;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@PrimaryKeyJoinColumn(name = "credit_account_id")
-public class CreditAccount extends BillingDetails {
+@PrimaryKeyJoinColumn(name = "credit_account_id") //optional
+public class CreditAccountJoined extends BillingDetailsJoined {
     private String cardNumber;
 
     @Override

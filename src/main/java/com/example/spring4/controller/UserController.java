@@ -57,7 +57,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public UserDto get(@PathVariable(name = "userId") UUID id) {
         return Optional.of(id)
-                .map(userService::get)
+                .map(userService::getAndInitialize)
                 .map(userMapper::toDto)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
@@ -67,7 +67,7 @@ public class UserController {
     @GetMapping("/info/{userId}")
     public UserInfoDto getInfo(@PathVariable(name = "userId") UUID id) {
         return Optional.of(id)
-                .map(userService::get)
+                .map(userService::getAndInitialize)
                 .map(userMapper::toInfoDto)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
@@ -79,10 +79,7 @@ public class UserController {
         return Optional.ofNullable(createDto)
                 .map(userMapper::fromCreateDto)
                 .map(userService::create)
-                .map(it -> {
-                    userService.getAccount(it.getSecond().getId());
-                    return userMapper.toDto(it.getFirst());
-                })
+                .map(userMapper::toDto)
                 .orElseThrow();
     }
 
