@@ -6,6 +6,7 @@ import com.example.spring4.service.BillingDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -47,6 +48,7 @@ public class BillingDetailsController {
     }
 
     @PatchMapping(path = "billing-details/{billingDetailsId}")
+    @PreAuthorize("hasPermission(#billingDetailsId, 'BillingDetails', 'UPDATE')")
     public BillingDetailsDto update(@PathVariable UUID billingDetailsId, @RequestBody BillingDetailsDto billingDetailsDto) {
         return Optional.of(billingDetailsDto)
                 .map(billingDetailsMapper::fromDto)

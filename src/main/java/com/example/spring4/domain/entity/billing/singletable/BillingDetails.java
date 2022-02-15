@@ -10,6 +10,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import static javax.persistence.FetchType.*;
@@ -29,6 +30,7 @@ public abstract class BillingDetails extends BaseEntity {
     private String string;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     public abstract BillingType getBillingType();

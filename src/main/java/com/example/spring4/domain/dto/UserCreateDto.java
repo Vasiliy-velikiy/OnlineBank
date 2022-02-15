@@ -29,6 +29,7 @@ public class UserCreateDto {
     String firstName;
     String lastName;
     String longAsString;
+    String password;
     @NotNull
     @Min(value = 0)
     @Max(value = 120)

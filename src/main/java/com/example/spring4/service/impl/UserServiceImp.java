@@ -2,6 +2,7 @@ package com.example.spring4.service.impl;
 
 import com.example.spring4.domain.entity.User;
 import com.example.spring4.domain.mapper.UserMapper;
+import com.example.spring4.repository.BillingDetailsRepository;
 import com.example.spring4.repository.UserRepository;
 import com.example.spring4.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +20,12 @@ import java.util.UUID;
  */
 @Service
 @Primary
-@Transactional
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final BillingDetailsRepository billingDetailsRepository;
 
     @Override
     public User getAndInitialize(UUID id) {
@@ -35,11 +37,13 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    @Transactional
     public User create(User user) {
         return userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public User update(UUID id, User user) {
         return Optional.of(id)
                 .map(this::getAndInitialize)
@@ -49,7 +53,9 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    @Transactional
     public void delete(UUID id) {
+        billingDetailsRepository.deleteByUserId(id);
         userRepository.deleteById(id);
     }
 }

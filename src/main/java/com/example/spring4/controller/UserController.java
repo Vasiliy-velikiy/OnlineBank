@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -55,6 +56,7 @@ public class UserController {
     @ApiResponse(responseCode = "200", description = "User found")
     @ApiResponse(responseCode = "500", description = "User not found")
     @GetMapping("/{userId}")
+    @PreAuthorize("hasRole('ADMIN') || hasAuthority('ROLE_ADMIN') || hasPermission(#id, 'READ') || userRepository.findById(#id) != null")
     public UserDto get(@PathVariable(name = "userId") UUID id) {
         return Optional.of(id)
                 .map(userService::getAndInitialize)

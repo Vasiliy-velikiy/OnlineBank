@@ -14,8 +14,9 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,6 +31,7 @@ import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PRIVATE;
 
 /**
@@ -46,6 +48,7 @@ import static lombok.AccessLevel.PRIVATE;
 public class User extends BaseEntity {
     private String firstName;
     private String lastName;
+    private String password;
     @Convert(converter = Converter.class)
     private String longAsString;
     private String email;
@@ -54,7 +57,7 @@ public class User extends BaseEntity {
     private Role role = ADMIN;
     @Embedded
     private AddressEmbeddable addressEmbeddable;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = LAZY, mappedBy = "user", optional = false)
     private Address address;
 
     @Setter(PRIVATE)
@@ -62,6 +65,15 @@ public class User extends BaseEntity {
             orphanRemoval = true,
             cascade = {PERSIST, MERGE, DETACH, REFRESH})
     private List<BillingDetails> billingDetails = new ArrayList<>();
+
+    @Setter(PRIVATE)
+    @ManyToMany
+    @JoinTable(
+            name = "user_address_mtm",
+            joinColumns = @JoinColumn(name = "address_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<AddressMtm> addressMtms;
 
     @ElementCollection
     @CollectionTable(name = "someObjects",
@@ -85,6 +97,11 @@ public class User extends BaseEntity {
     public void addBillingDetails(BillingDetails billingDetails) {
         this.billingDetails.add(billingDetails);
         billingDetails.setUser(this);
+    }
+
+    public void addAddressMtm(AddressMtm addressMtm) {
+        addressMtms.add(addressMtm);
+        addressMtm.getUsers().add(this);
     }
 
     public void removeBillingDetails(BillingDetails billingDetails) {

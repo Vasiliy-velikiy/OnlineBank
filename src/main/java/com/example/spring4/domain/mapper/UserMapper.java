@@ -23,6 +23,7 @@ public interface UserMapper {
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "addressEmbeddable", ignore = true)
     @Mapping(target = "billingDetails", ignore = true)
+    @Mapping(target = "addressMtms", ignore = true)
     User fromCreateDto(UserCreateDto source);
 
     @Mapping(target = "id", ignore = true)
@@ -31,9 +32,11 @@ public interface UserMapper {
     @Mapping(target = "someIds", ignore = true)
     @Mapping(target = "addressEmbeddable", ignore = true)
     @Mapping(target = "billingDetails", ignore = true)
+    @Mapping(target = "addressMtms", ignore = true)
     User fromUpdateDto(UserUpdateDto source);
 
     @Mapping(target = "age", ignore = true)
+    @Mapping(target = "someIds", ignore = true)
     UserDto toDto(User source);
 
     @Mapping(target = "addressId", source = "address.id")

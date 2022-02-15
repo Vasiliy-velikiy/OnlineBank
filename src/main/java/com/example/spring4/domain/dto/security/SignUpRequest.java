@@ -1,5 +1,6 @@
-package com.example.spring4.domain.dto;
+package com.example.spring4.domain.dto.security;
 
+import com.example.spring4.domain.dto.UserCreateDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
@@ -9,17 +10,13 @@ import static lombok.AccessLevel.PRIVATE;
 
 /**
  * @author dkotov
- * @since 16.12.2021
+ * @since 10.02.2022
  */
 @Value
 @Builder
 @Jacksonized
 @AllArgsConstructor(access = PRIVATE)
-public class UserUpdateDto {
-    String firstName;
-    String lastName;
-    String email;
-    String longAsString;
+public class SignUpRequest {
+    String username;
     String password;
-    int age;
 }
