@@ -1,0 +1,10 @@
+{
+  "lastName": "firstName1",
+  "firstName": "firstName1",
+  "age": 11,
+  "address": {},
+  "someIds": [
+    "someid1",
+    "someid2"
+  ]
+}

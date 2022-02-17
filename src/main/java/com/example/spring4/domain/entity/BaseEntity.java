@@ -24,7 +24,6 @@ import static lombok.AccessLevel.PRIVATE;
 public abstract class BaseEntity {
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "varchar(36)")
     private UUID id;
 
     @Version

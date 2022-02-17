@@ -42,9 +42,6 @@ import static lombok.AccessLevel.PRIVATE;
 @Setter
 @Entity
 @Table(name = "users")
-@AttributeOverrides(value = {
-        @AttributeOverride(name = "id", column = @Column(name = "user_id", columnDefinition = "varchar(36)"))
-})
 public class User extends BaseEntity {
     private String firstName;
     private String lastName;

@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String login(LoginRequest loginRequest) {
         User user = userRepository.findByEmail(loginRequest.getUsername())
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("User not found"));
         if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             return tokenService.generateToken(user);
         } else {

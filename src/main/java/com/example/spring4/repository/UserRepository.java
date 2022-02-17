@@ -2,6 +2,7 @@ package com.example.spring4.repository;
 
 import com.example.spring4.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.Optional;
 import java.util.UUID;
